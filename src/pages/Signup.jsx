@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Signup() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -14,6 +15,7 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!name.trim()) { setError('Please enter your name.'); return; }
     if (!email || !password || !confirm) { setError('Please fill in all fields.'); return; }
     if (password !== confirm) { setError('Passwords do not match.'); return; }
     if (password.length < 6) { setError('Password must be at least 6 characters.'); return; }
@@ -21,7 +23,7 @@ export default function Signup() {
     try {
       setError('');
       setLoading(true);
-      await signup(email, password);
+      await signup(email, password, name.trim());
       navigate('/explore');
     } catch (err) {
       setError(
@@ -45,6 +47,20 @@ export default function Signup() {
         {error && <div className="form-error" role="alert" id="signup-error">{error}</div>}
 
         <form onSubmit={handleSubmit} noValidate aria-label="Signup form">
+          <div className="form-group">
+            <label className="form-label" htmlFor="signup-name">Your Name</label>
+            <input
+              id="signup-name"
+              type="text"
+              className="form-input"
+              placeholder="How should we call you?"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+              autoComplete="name"
+            />
+          </div>
+
           <div className="form-group">
             <label className="form-label" htmlFor="signup-email">Email Address</label>
             <input

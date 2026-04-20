@@ -19,8 +19,15 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [userProfile, setUserProfile] = useState(null); // global profile data
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function signup(email, password, displayName = '') {
+    const credential = await createUserWithEmailAndPassword(auth, email, password);
+    if (displayName) {
+      await setDoc(doc(db, 'userProfiles', credential.user.uid), {
+        displayName,
+        createdAt: serverTimestamp(),
+      });
+    }
+    return credential;
   }
 
   function login(email, password) {
