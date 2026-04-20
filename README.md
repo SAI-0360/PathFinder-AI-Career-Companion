@@ -172,7 +172,7 @@ src/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/pathfinder.git
+git clone https://github.com/SAI-0360/PathFinder-AI-Career-Companion.git
 cd pathfinder
 ```
 ### 2. Install dependencies
