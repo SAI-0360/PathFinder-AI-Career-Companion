@@ -22,7 +22,7 @@ export default function Signup() {
       setError('');
       setLoading(true);
       await signup(email, password);
-      navigate('/create-roadmap');
+      navigate('/explore');
     } catch (err) {
       setError(
         err.code === 'auth/email-already-in-use'
