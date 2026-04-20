@@ -6,7 +6,7 @@ An AI-powered career companion that helps users explore career paths and generat
 
 ## 🌐 Live Demo
 
-🔗 
+🔗 https://pathfinder-ai-career-companion.vercel.app/
 
 ---
 
@@ -203,3 +203,4 @@ npm run dev
 ```
 http://localhost:5173
 ```
+---
